@@ -172,14 +172,19 @@
     </script>
 
     {{-- Sweetalert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     document.querySelectorAll('.delete-form').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Ambil pesan dari atribut data
+            const title = form.getAttribute('data-title') || 'Yakin hapus?';
+            const message = form.getAttribute('data-message') || 'Data akan dihapus permanen!';
+
             Swal.fire({
-                title: 'Yakin hapus?',
-                text: "Data task akan dihapus permanen!",
+                title: title,
+                text: message,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -192,7 +197,7 @@
             });
         });
     });
-</script>
+    </script>
 
 </body>
 
