@@ -72,56 +72,56 @@
                         <li class="sidebar-title">Menu</li>
 
                         @if (session('role') === 'HR')
-                            <li class="sidebar-item active ">
+                            <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }} ">
                                 <a href="{{ url('/dashboard') }}" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('tasks') ? 'active' : '' }}">
                                 <a href="{{ url('/tasks') }}" class='sidebar-link'>
                                     <i class="bi bi-check-circle-fill"></i>
                                     <span>Tasks</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('employees') ? 'active' : '' }}">
                                 <a href="{{ url('/employees') }}" class='sidebar-link'>
                                     <i class="bi bi-people-fill"></i>
                                     <span>Employees</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('departments') ? 'active' : '' }}">
                                 <a href="{{ url('/departments') }}" class='sidebar-link'>
                                     <i class="bi bi-briefcase-fill"></i>
                                     <span>Departments</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('roles') ? 'active' : '' }}">
                                 <a href="{{ url('/roles') }}" class='sidebar-link'>
                                     <i class="bi bi-tag-fill"></i>
                                     <span>Roles</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('presences') ? 'active' : '' }}">
                                 <a href="{{ url('/presences') }}" class='sidebar-link'>
                                     <i class="bi bi-table"></i>
                                     <span>Precences</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('payrolls') ? 'active' : '' }}">
                                 <a href="{{ url('/payrolls') }}" class='sidebar-link'>
                                     <i class="bi bi-currency-dollar"></i>
                                     <span>Payrolls</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('leave-requests') ? 'active' : '' }}">
                                 <a href="{{ url('/leave-requests') }}" class='sidebar-link'>
                                     <i class="bi bi-shift-fill"></i>
                                     <span>Leave Requests</span>
@@ -130,35 +130,35 @@
                         @endif
 
                         @if (in_array(session('role'), ['Developer', 'Sales']))
-                            <li class="sidebar-item active ">
+                            <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }} ">
                                 <a href="{{ url('/dashboard') }}" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('tasks') ? 'active' : '' }}">
                                 <a href="{{ url('/tasks') }}" class='sidebar-link'>
                                     <i class="bi bi-check-circle-fill"></i>
                                     <span>Tasks</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('presences') ? 'active' : '' }}">
                                 <a href="{{ url('/presences') }}" class='sidebar-link'>
                                     <i class="bi bi-table"></i>
                                     <span>Precences</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('payrolls') ? 'active' : '' }}">
                                 <a href="{{ url('/payrolls') }}" class='sidebar-link'>
                                     <i class="bi bi-currency-dollar"></i>
                                     <span>Payrolls</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item {{ request()->is('leave-requests') ? 'active' : '' }}">
                                 <a href="{{ url('/leave-requests') }}" class='sidebar-link'>
                                     <i class="bi bi-shift-fill"></i>
                                     <span>Leave Requests</span>
