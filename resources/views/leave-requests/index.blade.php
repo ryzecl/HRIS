@@ -59,7 +59,9 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
-                                <th>Option</th>
+                                @if (session('role') == 'HR')
+                                    <th>Option</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -78,26 +80,27 @@
                                             <span class="text-warning">{{ ucfirst($leaveRequest->status) }}</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        @if ($leaveRequest->status == 'pending' || $leaveRequest->status == 'rejected')
-                                            <a href="{{ route('leave-requests.confirmed', $leaveRequest->id) }}"
-                                                class="btn btn-success btn-sm">Confirm</a>
-                                        @else
-                                            <a href="{{ route('leave-requests.rejected', $leaveRequest->id) }}"
-                                                class="btn btn-secondary btn-sm">Reject</a>
-                                        @endif
-                                        <a href="{{ route('leave-requests.edit', $leaveRequest->id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('leave-requests.destroy', $leaveRequest->id) }}"
-                                            class="delete-form" method="POST" style="display: inline;"
-                                            data-title='Yakin menghapus leave request ini?'
-                                            data-message='Data leave request akan dihapus permanen!'>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-
-                                    </td>
+                                    @if (session('role') == 'HR')
+                                        <td>
+                                            @if ($leaveRequest->status == 'pending' || $leaveRequest->status == 'rejected')
+                                                <a href="{{ route('leave-requests.confirmed', $leaveRequest->id) }}"
+                                                    class="btn btn-success btn-sm">Confirm</a>
+                                            @else
+                                                <a href="{{ route('leave-requests.rejected', $leaveRequest->id) }}"
+                                                    class="btn btn-secondary btn-sm">Reject</a>
+                                            @endif
+                                            <a href="{{ route('leave-requests.edit', $leaveRequest->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('leave-requests.destroy', $leaveRequest->id) }}"
+                                                class="delete-form" method="POST" style="display: inline;"
+                                                data-title='Yakin menghapus leave request ini?'
+                                                data-message='Data leave request akan dihapus permanen!'>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

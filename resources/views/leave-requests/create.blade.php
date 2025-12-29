@@ -54,21 +54,23 @@
                     <form action="{{ route('leave-requests.store') }}" method="POST">
                         @csrf
 
-                        <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee</label>
-                            <select name="employee_id" id="employee_id"
-                                class="form-control @error('employee_id') is-invalid @enderror" required>
-                                <option value="">Select Employee</option>
-                                @foreach ($employees as $employee)
-                                    <option value="{{ $employee->id }}"
-                                        {{ $employee->id == old('employee_id') ? 'selected' : '' }}>
-                                        {{ $employee->fullname }}</option>
-                                @endforeach
-                            </select>
-                            @error('employee_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @if (session('role') == 'HR')
+                            <div class="mb-3">
+                                <label for="employee_id" class="form-label">Employee</label>
+                                <select name="employee_id" id="employee_id"
+                                    class="form-control @error('employee_id') is-invalid @enderror" required>
+                                    <option value="">Select Employee</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}"
+                                            {{ $employee->id == old('employee_id') ? 'selected' : '' }}>
+                                            {{ $employee->fullname }}</option>
+                                    @endforeach
+                                </select>
+                                @error('employee_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        @endif
 
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">Leave Type</label>
