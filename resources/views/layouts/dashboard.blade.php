@@ -213,6 +213,9 @@
     <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script>
 
+    <!-- Need: Chartjs -->
+    <script src="{{ asset('mazer/assets/extensions/chart.js/chart.umd.js') }}"></script>
+
     {{-- Format input date --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
@@ -224,6 +227,50 @@
             dateFormat: "Y-m-d H:i:s",
             enableTime: true,
         });
+
+        var ctxBar = document.getElementById("presence").getContext("2d");
+        var myBar = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                    'October', 'November', 'December'
+                ],
+                datasets: [{
+                    label: 'Total',
+                    backgroundColor: 'rgba(63, 82, 227, 1)',
+                    borderColor: '#57caeb',
+                    data: []
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: "Latest Presence"
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        })
+
+        function updateData() {
+            fetch('/dashboard/presence')
+                .then(response => response.json())
+                .then((output) => {
+                    myBar.data.datasets = [{
+                        label: 'Total',
+                        backgroundColor: 'rgba(63, 82, 227, 1)',
+                        borderColor: '#57caeb',
+                        data: output
+                    }];
+                    myBar.update();
+                })
+        }
+
+        updateData();
     </script>
 
     {{-- Sweetalert --}}
