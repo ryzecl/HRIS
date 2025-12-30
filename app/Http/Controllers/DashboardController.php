@@ -26,8 +26,9 @@ class DashboardController extends Controller
     public function presence()
     {
         $data = Presence::where('status', 'present')
-            ->selectRaw('MONTH(date) as month, COUNT(*) as total_present')
-            ->groupBy('month')
+            ->selectRaw('MONTH(date) as month, YEAR(date) as year, COUNT(*) as total_present')
+            ->groupBy('month', 'year')
+            ->orderBy('month', 'asc')
             ->get();
 
         // Inisialisasi array 12 bulan dengan nilai 0
